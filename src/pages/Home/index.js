@@ -12,6 +12,7 @@ import Menu from '../../components/Menu';
 import ModalLink from '../../components/ModalLink';
 
 import api from '../../services/api';
+import { saveLink } from '../../utils/storeLinks';
 
 import {
   ContainerLogo, Logo, ContainerContent, Title, SubTitle, ContainerInput,
@@ -32,6 +33,9 @@ export default function Home() {
           long_url: input
         });
       setData(response.data);
+
+      saveLink('link', response.data)
+
       Keyboard.dismiss();
       setLoading(false);
       setInput('');
@@ -43,14 +47,13 @@ export default function Home() {
       setInput('');
       setLoading(false);
     }
-
   }
 
   return (
     <TouchableWithoutFeedback
       onPress={() => Keyboard.dismiss()}
     >
-      <LinearGradient 
+      <LinearGradient
         colors={['#1ddbb9', '#132742']}
         style={{ flex: 1, justifyContent: 'center' }}
       >
@@ -75,10 +78,10 @@ export default function Home() {
           <ContainerContent>
             <Title>
               SujeitoLink
-              </Title>
+            </Title>
             <SubTitle>
               Cole seu link para encurtar
-              </SubTitle>
+            </SubTitle>
 
             <ContainerInput>
               <BoxIcon>
